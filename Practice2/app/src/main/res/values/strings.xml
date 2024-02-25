@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Practice2</string>
+    <string name="course_detail">Course Detail</string>
+    <string name="desc">Description</string>
+
+    <string name="back">Go Back</string>
+    <string name="course_number">Course Number</string>
+    <string name="course_list">Course List</string>
+
+
+
+</resources>

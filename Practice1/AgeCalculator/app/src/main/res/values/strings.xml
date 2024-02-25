@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Age Calculator</string>
+    <string name="title">Age Calculator</string>
+    <string name="FirstNameHint">Enter your First Name</string>
+    <string name="LastNameHint">Enter your Last Name</string>
+    <string name="DOBHint">Enter your Date of Birth in dd-MM-yyyy</string>
+    <string name="button">Calculate Age</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
