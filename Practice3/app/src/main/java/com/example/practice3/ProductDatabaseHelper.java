@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProductDatabaseHelper extends SQLiteOpenHelper {
@@ -163,5 +165,6 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
 
         database.close();
     }
+
 
 }

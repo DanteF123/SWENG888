@@ -6,19 +6,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ResultsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
-    private ProductDatabaseHelper databaseHelper;
-    private ProductAdapter productAdapter;
-    private Button buttonBackSelection;
-    private FloatingActionButton floatingActionButton;
+
+    private SelectedProductAdapter selectedProductAdapter;
+    private Button emailButton;
+    private ArrayList<Product> productList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +34,27 @@ public class ResultsActivity extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recyclerView);
 
-        databaseHelper = new ProductDatabaseHelper(this);
-
-        List<Product> products;
+        emailButton = findViewById(R.id.emailButton);
 
 
-        if(databaseHelper.isDatabaseEmpty()){
-            databaseHelper.populateProductDatabase();
-        }
+        Bundle bundle = getIntent().getExtras();
+        productList = bundle.getParcelableArrayList("data");
 
-        products=databaseHelper.getAllProducts();
 
-        productAdapter=new ProductAdapter(products);
+//
+//
+//        selectedProductAdapter=new SelectedProductAdapter(productList);
+//
+//        recyclerView.setAdapter(selectedProductAdapter);
+//
+//        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+//        recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(productAdapter);
 
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(layoutManager);
+
 
     }
+
+
 
 }

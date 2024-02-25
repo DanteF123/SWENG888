@@ -1,30 +1,82 @@
 package com.example.practice3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private ProductDatabaseHelper databaseHelper;
+    private ProductAdapter productAdapter;
+    private Button button2;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn=findViewById(R.id.button);
+        recyclerView=findViewById(R.id.recyclerView);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        button2 = findViewById(R.id.button2);
+
+        databaseHelper = new ProductDatabaseHelper(this);
+
+        List<Product> products;
+        ArrayList<Product> selectedProducts;
+
+
+
+        if(databaseHelper.isDatabaseEmpty()){
+            databaseHelper.populateProductDatabase();
+        }
+
+        products=databaseHelper.getAllProducts();
+
+        productAdapter=new ProductAdapter(products);
+
+        recyclerView.setAdapter(productAdapter);
+
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        selectedProducts=productAdapter.selectedItems;
+
+        ArrayList<Product> test= new ArrayList<Product>();
+        test.add(new Product("a","b","c","d"));
+        test.add(new Product("f","g","h","i"));
+
+
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ResultsActivity.class);
-                startActivity(i);
-            }
-        });
-    }
 
+                Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("data", test);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                }
+
+                }
+
+
+        );
+
+    }
 
 }
