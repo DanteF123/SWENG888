@@ -138,29 +138,51 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         values = new ContentValues();
         values.put(KEY_NAME, "Bananas");
         values.put(KEY_SELLER, "Wegmans");
-        values.put(KEY_DESCRIPTION, "Banana desc");
+        values.put(KEY_DESCRIPTION, "Yellow fruit good for potassium");
         values.put(KEY_PRICE, "49c");
         database.insert(TABLE_PRODUCT, null, values);
 
         values = new ContentValues();
         values.put(KEY_NAME, "Oranges");
         values.put(KEY_SELLER, "Wegmans");
-        values.put(KEY_DESCRIPTION, "Orange desc");
-        values.put(KEY_PRICE, "49c");
+        values.put(KEY_DESCRIPTION, "Juicy fruit that is very refreshing");
+        values.put(KEY_PRICE, "$1");
         database.insert(TABLE_PRODUCT, null, values);
 
         values = new ContentValues();
         values.put(KEY_NAME, "Grapefruit");
-        values.put(KEY_SELLER, "Wegmans");
-        values.put(KEY_DESCRIPTION, "Grapefruit desc");
-        values.put(KEY_PRICE, "49c");
+        values.put(KEY_SELLER, "Giant");
+        values.put(KEY_DESCRIPTION, "Large and sour fruit");
+        values.put(KEY_PRICE, "$1.25");
         database.insert(TABLE_PRODUCT, null, values);
 
         values = new ContentValues();
         values.put(KEY_NAME, "Mangos");
+        values.put(KEY_SELLER, "Redners");
+        values.put(KEY_DESCRIPTION, "Tropical and delicious");
+        values.put(KEY_PRICE, "60c");
+        database.insert(TABLE_PRODUCT, null, values);
+
+        values = new ContentValues();
+        values.put(KEY_NAME, "Kiwi");
+        values.put(KEY_SELLER, "Redners");
+        values.put(KEY_DESCRIPTION, "Somewhat sour");
+        values.put(KEY_PRICE, "70c");
+        database.insert(TABLE_PRODUCT, null, values);
+
+
+        values = new ContentValues();
+        values.put(KEY_NAME, "Apples");
         values.put(KEY_SELLER, "Wegmans");
-        values.put(KEY_DESCRIPTION, "Mangoes desc");
-        values.put(KEY_PRICE, "49c");
+        values.put(KEY_DESCRIPTION, "Classic and versatile");
+        values.put(KEY_PRICE, "1.22c");
+        database.insert(TABLE_PRODUCT, null, values);
+
+        values = new ContentValues();
+        values.put(KEY_NAME, "Grapes");
+        values.put(KEY_SELLER, "Wegmans");
+        values.put(KEY_DESCRIPTION, "Delicious snack");
+        values.put(KEY_PRICE, "1.45c");
         database.insert(TABLE_PRODUCT, null, values);
 
         database.close();

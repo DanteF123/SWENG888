@@ -58,5 +58,10 @@ public class SelectedProductAdapter extends RecyclerView.Adapter<SelectedProduct
         }
     }
 
+    public void removeAll(ArrayList<Product> product){
+        product.clear();
+        notifyDataSetChanged();
+    }
+
 
 }

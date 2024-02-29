@@ -5,7 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class Product implements Parcelable {
+import java.io.Serializable;
+
+public class Product implements Parcelable, Serializable {
     private String Name;
     private String Seller;
     private String Description;
@@ -45,6 +47,11 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(Name);
+        dest.writeString(Seller);
+        dest.writeString(Description);
+        dest.writeString(Price);
+
     }
 
     public String getName() {

@@ -54,11 +54,6 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
-        selectedProducts=productAdapter.selectedItems;
-
-        ArrayList<Product> test= new ArrayList<Product>();
-        test.add(new Product("a","b","c","d"));
-        test.add(new Product("f","g","h","i"));
 
 
         button2.setOnClickListener(new View.OnClickListener() {
@@ -66,9 +61,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("data", test);
-                intent.putExtras(bundle);
+
+                intent.putParcelableArrayListExtra("data", (ArrayList<? extends Parcelable>) productAdapter.selectedItems);
                 startActivity(intent);
                 }
 
