@@ -12,6 +12,7 @@ public class Product implements Parcelable, Serializable {
     private String Seller;
     private String Description;
     private String Price;
+
     protected Product(Parcel in) {
         Name = in.readString();
         Seller = in.readString();
@@ -19,6 +20,7 @@ public class Product implements Parcelable, Serializable {
         Price = in.readString();
     }
 
+    //Constructor used when creating a new instance of the Product class
     public Product(String name, String seller, String description, String price) {
         Name = name;
         Seller = seller;
@@ -45,6 +47,7 @@ public class Product implements Parcelable, Serializable {
         return 0;
     }
 
+    // Method used when sending data from main activity to Results activity. Required for putParcelableArrayListExtra.
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(Name);
@@ -54,6 +57,7 @@ public class Product implements Parcelable, Serializable {
 
     }
 
+    //Getters and setters
     public String getName() {
         return Name;
     }

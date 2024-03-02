@@ -17,6 +17,7 @@ import java.util.List;
 
 public class SelectedProductAdapter extends RecyclerView.Adapter<SelectedProductAdapter.ViewHolder> {
 
+    //Arraylist containing the products selected by the user in the main activity.
     private ArrayList<Product> products;
 
 
@@ -29,6 +30,7 @@ public class SelectedProductAdapter extends RecyclerView.Adapter<SelectedProduct
         return new ViewHolder(view);
     }
 
+    //binding the data with the attributes from the Product class.
     @Override
     public void onBindViewHolder(@NonNull SelectedProductAdapter.ViewHolder holder, int position) {
         Product product = products.get(position);
@@ -44,6 +46,7 @@ public class SelectedProductAdapter extends RecyclerView.Adapter<SelectedProduct
         return products.size();
     }
 
+    // viewholder class assigning variables to layout
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name,description,price,seller;
 
@@ -58,6 +61,7 @@ public class SelectedProductAdapter extends RecyclerView.Adapter<SelectedProduct
         }
     }
 
+    //method to remove all items from the arraylist, used once the user sends an email.
     public void removeAll(ArrayList<Product> product){
         product.clear();
         notifyDataSetChanged();
