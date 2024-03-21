@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/android_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_album_list"
+            android:icon="@drawable/baseline_album_24"
+            android:title="Albums" />
+        <item
+            android:id="@+id/nav_add_album"
+            android:icon="@drawable/baseline_add_24"
+            android:title="Add Album" />
+    </group>
+</menu>

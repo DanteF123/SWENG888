@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "884569387243",
+    "project_id": "sweng888-practice-4",
+    "storage_bucket": "sweng888-practice-4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884569387243:android:1eb7bb508472adf07e4eae",
+        "android_client_info": {
+          "package_name": "android.bignerdranch.practice4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKBIhAwZ9wTNcQ-4cmvoDCzpfSuJSiDJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
