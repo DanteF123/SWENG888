@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.bignerdranch.practice4.R;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -43,9 +45,12 @@ public class AlbumListFragment extends Fragment {
     private StorageReference mStorageReference;
 
     private List<Album> mAlbumList;
+    private List<Album> mSelectedAlbums;
+
 
     private RecyclerView mRecyclerView;
     private AlbumAdapter mAlbumAdapter;
+    private Button btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +70,8 @@ public class AlbumListFragment extends Fragment {
 
         //posts arraylist
         mAlbumList = new ArrayList<>();
+        btn=view.findViewById(R.id.deleteButton);
+
         return view;
     }
 
@@ -86,6 +93,7 @@ public class AlbumListFragment extends Fragment {
 
                 mAlbumAdapter.notifyDataSetChanged();
 
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -93,28 +101,35 @@ public class AlbumListFragment extends Fragment {
                 Toast.makeText(getContext(),"something went wrong", Toast.LENGTH_LONG).show();
             }
         });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSelectedAlbums = mAlbumAdapter.getSelectedItems();
+                String collectionPath = "Album";
+
+                for(Album x:mSelectedAlbums){
+                    db.collection(collectionPath).document(x.getAlbum()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(getContext(),x.getAlbum().toString()+" was deleted successfully.",Toast.LENGTH_SHORT).show();
+
+                            mAlbumList.remove(x);
+
+                            mAlbumAdapter.notifyDataSetChanged();
+
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(),"Error deleting Document.",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            }
+        });
     }
 
-    //    private AlbumAdapter mAlbumAdapter;
-//    private RecyclerView mRecyclerView;
-//
-//    List<Album> mAlbumList;
-//
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//
-//        View view = inflater.inflate(R.layout.fragment_album_list, container, false);
-//        mRecyclerView = view.findViewById(R.id.recyclerView);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//
-//        mAlbumList = new ArrayList<>();
-//        mAlbumList.add(new Album("Taylor Swift", "1970","2010"));
-//
-//        mAlbumAdapter = new AlbumAdapter(mAlbumList);
-//        mRecyclerView.setAdapter(mAlbumAdapter);
-//
-//
-//        return view;
-//    }
 }

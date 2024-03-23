@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -53,15 +54,28 @@ public class AddAlbumFragment extends Fragment {
                 albumFirebase.put("Album", user_album);
                 albumFirebase.put("Year", user_year);
 
-                mCollectionReference.add(albumFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                DocumentReference documentReference = mCollectionReference.document(user_album);
+
+                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getContext(),user_album+" was added successfully",Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(),"Something went wrong.",Toast.LENGTH_SHORT).show();
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()){
+                            Toast.makeText(getContext(),"Album already exists in list",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            documentReference.set(albumFirebase).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(getContext(),user_album+" was added successfully",Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(),"Something went wrong.",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
                     }
                 });
 
