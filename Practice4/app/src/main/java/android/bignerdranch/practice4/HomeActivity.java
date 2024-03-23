@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class HomeActivity extends AppCompatActivity {
 
     EditText email,password;
-    Button logIn, signUp, asdf;
+    Button logIn, signUp;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
@@ -39,19 +39,11 @@ public class HomeActivity extends AppCompatActivity {
         logIn = findViewById(R.id.LogInButton);
         signUp = findViewById(R.id.SignUpButton);
 
-        asdf=findViewById(R.id.ASDFButton);
 
         //Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-
-        asdf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,MainActivity.class));
-            }
-        });
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
