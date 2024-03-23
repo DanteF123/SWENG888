@@ -1,7 +1,8 @@
 package android.bignerdranch.practice4;
 
+import android.bignerdranch.practice4.fragments.AddAlbumFragment;
 import android.bignerdranch.practice4.fragments.AlbumListFragment;
-import android.bignerdranch.practice4.fragments.TestFragment;
+import android.bignerdranch.practice4.fragments.HomeFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         /** Step 7:Set the default fragment to the HomeFragment */
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new TestFragment()).commit();
+                .replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
 
@@ -77,7 +78,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             signOut();
         } else if (id == R.id.nav_album_list) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AlbumListFragment()).commit();
+        } else if (id == R.id.nav_add_album) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddAlbumFragment()).commit();
+        }else if (id == R.id.nav_home) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
         }
+
 
 
         /** Close the navigation drawer */

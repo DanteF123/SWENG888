@@ -146,6 +146,11 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
 
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"User does not exist, please create an account.",Toast.LENGTH_SHORT).show();
+                }
             });
 
         }

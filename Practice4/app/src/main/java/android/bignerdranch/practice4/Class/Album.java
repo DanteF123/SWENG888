@@ -14,6 +14,9 @@ public class Album {
         Year = year;
     }
 
+    public Album() {
+    }
+
     public String getArtist() {
         return Artist;
     }
