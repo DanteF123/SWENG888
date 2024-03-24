@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.bignerdranch.practice4.R;
 
-
+/** Home Fragment simply welcoming the user. */
 public class HomeFragment extends Fragment {
 
     @Override

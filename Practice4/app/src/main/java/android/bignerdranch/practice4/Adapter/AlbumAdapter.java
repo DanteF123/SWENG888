@@ -17,14 +17,17 @@ import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
-    // Main list of product items to be displayed by main activity
+    // Main list of album items to be displayed
     private List<Album> albums;
 
     boolean isSelectMode = false;
-    // Array list of selected items to be sent to Results activity.
+    // Array list of selected items
     private ArrayList<Album> selectedItems = new ArrayList<>();
 
+    //constructor
     public AlbumAdapter(List<Album> albums) {this.albums=albums;}
+
+    // on create, inflate the album item
     @NonNull
     @Override
     public AlbumAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +35,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
+    // binding the data to the corresponding element
     @Override
     public void onBindViewHolder(@NonNull AlbumAdapter.ViewHolder holder, int position) {
         Album album = albums.get(position);
@@ -52,6 +56,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         return selectedItems;
     }
 
+    // viewholder which design
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView artist,album,year;
 
@@ -70,7 +75,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         itemView.setBackgroundColor(Color.TRANSPARENT);
                         selectedItems.remove(albums.get(getAdapterPosition()));
                     }else{
-                        itemView.setBackgroundColor(Color.GREEN);
+                        itemView.setBackgroundColor(Color.CYAN);
                         selectedItems.add(albums.get(getAdapterPosition()));
                     }
                     if (selectedItems.size()==0)
@@ -90,7 +95,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                             selectedItems.remove(albums.get(getAdapterPosition()));
                         }
                         else{
-                            itemView.setBackgroundColor(Color.GREEN);
+                            itemView.setBackgroundColor(Color.CYAN);
                             selectedItems.add(albums.get(getAdapterPosition()));
                         }
                         if(selectedItems.size()==0){

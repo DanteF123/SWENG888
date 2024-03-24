@@ -10,6 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+/** SplashScreen welcoming the user when the app is opened. */
 public class SplashScreen extends AppCompatActivity {
 
     @Override

@@ -22,10 +22,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/** Fragment corresponding to "Add Album". Takes user input and creates a record in Firestore. */
 public class AddAlbumFragment extends Fragment {
-
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    /** Corresponding collection */
     private CollectionReference mCollectionReference = db.collection("Album");
 
     private EditText album,artist,year;
@@ -40,11 +40,12 @@ public class AddAlbumFragment extends Fragment {
         album=view.findViewById(R.id.albumEditText);
         year=view.findViewById(R.id.yearEditText);
         btn= view.findViewById(R.id.button);
-
+        /** When the user clicks the button, take their inputs and create record in firestore, if the album does not already exist. */
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Map<String,Object> albumFirebase = new HashMap<>();
+                /** Getting user inputs */
 
                 String user_artist=artist.getText().toString();
                 String user_album=album.getText().toString();
@@ -59,6 +60,7 @@ public class AddAlbumFragment extends Fragment {
                 documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        /** If album is already in list, notify the user. Otherwise add the album. */
                         if(documentSnapshot.exists()){
                             Toast.makeText(getContext(),"Album already exists in list",Toast.LENGTH_SHORT).show();
                         }

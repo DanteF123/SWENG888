@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/** Home activity handling log in and account creation. */
 public class HomeActivity extends AppCompatActivity {
 
     EditText email,password;
@@ -33,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        /** Attach elements */
 
         email = findViewById(R.id.emailEditText);
         password = findViewById(R.id.passwordEditText);
@@ -42,8 +44,6 @@ public class HomeActivity extends AppCompatActivity {
 
         //Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
-
-
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -64,11 +64,12 @@ public class HomeActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /** Upon sign up button click, if user populated all necessary fields, create an account. */
                 if(!TextUtils.isEmpty(email.getText().toString())&& !TextUtils.isEmpty(password.getText().toString())){
 
                     String emailCreate = email.getText().toString().trim();
                     String passCreate = password.getText().toString().trim();
-
+                    /** Method used to create a user account. */
                     CreateUserEmailAccount(emailCreate,passCreate);
                 }else{
                     Toast.makeText(HomeActivity.this, "No fields can be empty", Toast.LENGTH_SHORT).show();
@@ -79,6 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /** Upon log in button click, if user populated all necessary fields, log user in. */
                 if(!TextUtils.isEmpty(email.getText().toString())&& !TextUtils.isEmpty(password.getText().toString())){
 
                     String emailCreate = email.getText().toString().trim();
@@ -95,12 +97,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
     private void CreateUserEmailAccount(
             String email,
             String pass
     ){
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass)){
+            /** Upon success, notify the user that the account was created successfully. */
             firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -115,6 +117,7 @@ public class HomeActivity extends AppCompatActivity {
             firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    /** Upon failure, notify the user of the error faced when attempting to sign up. */
                     Toast.makeText(HomeActivity.this, e.getMessage(),Toast.LENGTH_SHORT).show();
 
                 }
@@ -136,6 +139,7 @@ public class HomeActivity extends AppCompatActivity {
             ).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
+                    /** Upon success, welcome the user with a notification that they signed in successfully. */
                     FirebaseUser user = firebaseAuth.getCurrentUser();
                     Toast.makeText(HomeActivity.this,user.getEmail().toString()+" signed in successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(HomeActivity.this, MainActivity.class);
@@ -149,6 +153,7 @@ public class HomeActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    /** Upon failure, prompt the user to create an account instead. */
                     Toast.makeText(getApplicationContext(),"User does not exist, please create an account.",Toast.LENGTH_SHORT).show();
                 }
             });

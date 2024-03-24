@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+/** Activity that handles navigation view and logic. */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
@@ -38,18 +39,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        /** Step 3: Get the NavigationView object from the layout SML file */
+        /** Getting the NavigationView object */
         mNavigationView = findViewById(R.id.nav_view);
 
         View headerView = mNavigationView.getHeaderView(0);
         TextView headerSubtitleTextView=headerView.findViewById(R.id.nav_drawer_header_subtitle);
-
+        /** Setting header banner to users email. */
         Intent i = getIntent();
         headerSubtitleTextView.setText(i.getStringExtra("user_email"));
 
 
-        /** Step 4: Set the listener for the NavigationView. The Main Activity should
-         * implement the interface NavigationView.OnNavigationItemSelectedListener */
+        /** Set the listener for the NavigationView */
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mActionBarDrawerToggle = new ActionBarDrawerToggle(
@@ -59,17 +59,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_drawer_close // String to close
         );
 
-        /** Step 6: Include the mActionBarDrawerToggle as the listener to the DrawerLayout.
-         *  The synchState() method is used to synchronize the state of the navigation drawer */
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
         mActionBarDrawerToggle.syncState();
 
-        /** Step 7:Set the default fragment to the HomeFragment */
+        /** Setting the default fragment to the HomeFragment */
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
 
+    /** Attaching the corresponding fragment with the navigation menu item. Inflate the fragment upon navigation item select. */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {// Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -91,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /** Method to sign the user out*/
     private void signOut(){
         mAuth.signOut();
         Intent i = new Intent(MainActivity.this, HomeActivity.class);

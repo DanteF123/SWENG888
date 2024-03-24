@@ -1,5 +1,6 @@
 package android.bignerdranch.practice4.Class;
 
+/** Album class */
 public class Album {
 
     private String Artist;
@@ -7,7 +8,7 @@ public class Album {
     private String Year;
 
 
-
+    /** Constructor and empty constructor */
     public Album(String artist, String album, String year) {
         Artist = artist;
         Album = album;

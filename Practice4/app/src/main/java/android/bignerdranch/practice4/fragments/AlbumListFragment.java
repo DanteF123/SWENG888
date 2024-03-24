@@ -30,7 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/** Fragment that populates recycler view with elements in Firestore. */
 public class AlbumListFragment extends Fragment {
 
     private FirebaseAuth mFirebaseAuth;
@@ -63,12 +63,12 @@ public class AlbumListFragment extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         user = mFirebaseAuth.getCurrentUser();
 
-        //widgets
+        //Recyclerview
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        //posts arraylist
+        //Album arraylist
         mAlbumList = new ArrayList<>();
         btn=view.findViewById(R.id.deleteButton);
 
@@ -78,6 +78,7 @@ public class AlbumListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        /** Get elements from firestore. For each item, add to list associated with RecyclerView. */
         mCollectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -87,7 +88,7 @@ public class AlbumListFragment extends Fragment {
                     mAlbumList.add(album);
                 }
 
-                //reycler view
+
                 mAlbumAdapter= new AlbumAdapter(mAlbumList);
                 mRecyclerView.setAdapter(mAlbumAdapter);
 
@@ -98,16 +99,19 @@ public class AlbumListFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                /** Notify user if there is an error. */
                 Toast.makeText(getContext(),"something went wrong", Toast.LENGTH_LONG).show();
             }
         });
 
+        /** Delete the selected items from firestore upon button click. */
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSelectedAlbums = mAlbumAdapter.getSelectedItems();
                 String collectionPath = "Album";
 
+                /** For each selected item, delete the record from firestore and update the view. */
                 for(Album x:mSelectedAlbums){
                     db.collection(collectionPath).document(x.getAlbum()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
